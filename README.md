@@ -36,3 +36,6 @@ Then I replaced the rubber switch ring completing the board.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor3.jpg)
 
+# Audio
+
+![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)
