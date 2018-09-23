@@ -39,3 +39,7 @@ Then I replaced the rubber switch ring completing the board.
 # Audio
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)
+
+# Switches to the Pi
+
+![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
