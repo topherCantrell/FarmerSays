@@ -40,9 +40,8 @@ def wait_for_new_animal(feed_url):
             return an
         time.sleep(TIME_BETWEEN_POLLS)
         
-print(wait_for_new_animal(FARM_CHRIS))
-
-print(wait_for_new_animal(FARM_CHRIS))
+#print(wait_for_new_animal(FARM_CHRIS))
+#print(wait_for_new_animal(FARM_CHRIS))
 
 #post_animal(FARM_CHRIS,'Bat')
 #print(get_last_animal(FARM_CHRIS))
