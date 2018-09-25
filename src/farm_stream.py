@@ -27,4 +27,4 @@ def post_animal(feed_url,animal):
     return ret
 
 #post_animal(FARM_CHRIS,'Bat')
-print(get_last_animal(FARM_CHRIS))
+#print(get_last_animal(FARM_CHRIS))
