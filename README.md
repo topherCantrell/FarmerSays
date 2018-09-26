@@ -40,6 +40,8 @@ Then I replaced the rubber switch ring completing the board.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)
 
+https://pinout.xyz/pinout/phat_dac
+
 # Switches to the Pi
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
