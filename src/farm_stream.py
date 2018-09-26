@@ -2,16 +2,15 @@ import urllib.request
 import json
 import time
 
+import credentials # Not checked in ... simple KEY = VALUE module
+
 FARM_CHRIS = 'https://io.adafruit.com/api/v2/topher_cantrell/feeds/quantum-farmer-chris/data'
 FARM_GARY = 'https://io.adafruit.com/api/v2/garydion/feeds/quantum-farmer-gary/data'
 
 TIME_BETWEEN_POLLS = 2 # 2 Seconds
 
-with open('credentials.json') as f:
-    config = json.load(f)
-
 post_headers = {
-    'X-AIO-Key': config['AIO'], 
+    'X-AIO-Key': credentials.AIO, 
     'Content-Type':'application/json'
 }
 
