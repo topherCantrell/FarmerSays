@@ -40,6 +40,15 @@ Then I replaced the rubber switch ring completing the board.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor3.jpg)
 
+MotorShield v2.3
+  - [http://adafruit.com/products/1438](http://adafruit.com/products/1438)
+
+Driver manual
+  - [https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+
+Shield schematics
+  - [https://learn.adafruit.com/assets/34460](https://learn.adafruit.com/assets/34460)
+
 # Audio
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)

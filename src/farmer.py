@@ -2,7 +2,7 @@ import hardware
 import farm_stream
 import time
 
-# Mapping of pins to animal name (for feed)
+# Mapping of pins to animal name (for adafruit.io feed)
 ANIMALS = {
     4  : 'Sheep',   # 12:00
     5  : 'Turkey',  # 11:00
