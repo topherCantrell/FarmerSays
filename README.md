@@ -58,3 +58,8 @@ https://pinout.xyz/pinout/phat_dac
 # Switches to the Pi
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
+
+# Schematic
+
+![](https://github.com/topherCantrell/FarmerSays/blob/master/art/schematic.jpg)
+
