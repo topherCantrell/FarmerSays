@@ -34,11 +34,7 @@ Then I replaced the rubber switch ring completing the board.
 
 # Adding a motor
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor1.jpg)
-
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor2.jpg)
-
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor3.jpg)
+![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor.png)
 
 Motor Hat
 https://www.adafruit.com/product/2348
@@ -60,3 +56,6 @@ https://pinout.xyz/pinout/phat_dac
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/schematic.jpg)
 
+# Final Placement
+
+![](https://github.com/topherCantrell/FarmerSays/blob/master/art/final.jpg)
