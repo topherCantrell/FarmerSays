@@ -44,7 +44,7 @@ def init(pins, callback=None):
     for s in pins:
         GPIO.setup(s, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         if callback:
-            GPIO.add_event_detect(s, GPIO.RISING, callback=callback)  
+            GPIO.add_event_detect(s, GPIO.RISING, callback=callback,bouncetime=1000)  
 
 def set_motor(speed):
     """ Set the motor speed
