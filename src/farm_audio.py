@@ -28,6 +28,8 @@ def _get_next(animal, cache):
     }    
     '''
     
+    animal = animal.lower() # The audio files are all lower
+    
     # Get the current sound
     a = cache[animal] 
     i = a['next_to_play']

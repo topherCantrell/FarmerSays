@@ -1,16 +1,12 @@
-import time
 import threading
 
 import hdw_farmer_says as HDW # Switches and motor
 import farm_audio as AUD      # Audio files
-
+import farm_adafruit_io as IO # Adafruit streams
+    
 def switch_changed(event):    
-    # Two threads: one to manage the audio and one to run the motor.
     animal = ANIMALS[event]    
-    t = threading.Thread(target=AUD.prompt_and_play,args=(animal,))
-    t.start()
-    t = threading.Thread(target=HDW.spin_motor)
-    t.start()     
+    IO.post_animal(IO.FARM_CHRIS,animal)
 
 # Mapping of pins to animal name (for audio files)
 ANIMALS = {
@@ -32,8 +28,13 @@ HDW.init(ANIMALS,switch_changed)
 
 # Tell the user we are ready (it takes a few seconds
 # to initialize pygame and load the sounds).
-AUD.play('Rooster')
+AUD.play('Cat')
 HDW.spin_motor()
 
 while(True):
-    time.sleep(1)
+    animal = IO.wait_for_new_animal(IO.FARM_GARY)
+    # Two threads: one to manage the audio and one to run the motor.
+    t = threading.Thread(target=AUD.prompt_and_play,args=(animal,))
+    t.start()
+    t = threading.Thread(target=HDW.spin_motor)
+    t.start()  
