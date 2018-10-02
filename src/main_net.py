@@ -7,6 +7,11 @@ import farm_adafruit_io as IO # Adafruit streams
 def switch_changed(event):    
     animal = ANIMALS[event]    
     IO.post_animal(IO.FARM_CHRIS,animal)
+    
+# For now this is the same list as the pictures on the toy. But it doesn't 
+# have to be. We can have all kinds of animals in our audio library.
+VALID_ANIMALS = {'Sheep','Turkey','Cat','Bird','Cow','Pig',
+                 'Rooster','Coyote','Horse','Frog','Duck','Dog'}
 
 # Mapping of pins to animal name (for audio files)
 ANIMALS = {
@@ -33,8 +38,9 @@ HDW.spin_motor()
 
 while(True):
     animal = IO.wait_for_new_animal(IO.FARM_GARY)
-    # Two threads: one to manage the audio and one to run the motor.
-    t = threading.Thread(target=AUD.prompt_and_play,args=(animal,))
-    t.start()
-    t = threading.Thread(target=HDW.spin_motor)
-    t.start()  
+    if animal in VALID_ANIMALS:
+        # Two threads: one to manage the audio and one to run the motor.
+        t = threading.Thread(target=AUD.prompt_and_play,args=(animal,))
+        t.start()
+        t = threading.Thread(target=HDW.spin_motor)
+        t.start()  

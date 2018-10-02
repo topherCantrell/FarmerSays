@@ -4,8 +4,8 @@ import time
 
 import credentials # Not checked in ... simple KEY = VALUE module
 
-FARM_CHRIS = 'https://io.adafruit.com/api/v2/topher_cantrell/feeds/quantum-hdw_farmer_says-chris/data'
-FARM_GARY = 'https://io.adafruit.com/api/v2/garydion/feeds/quantum-hdw_farmer_says-gary/data'
+FARM_CHRIS = 'https://io.adafruit.com/api/v2/topher_cantrell/feeds/quantum-farmer-chris/data'
+FARM_GARY  = 'https://io.adafruit.com/api/v2/garydion/feeds/quantum-farmer-gary/data'
 
 TIME_BETWEEN_POLLS = 2 # 2 Seconds
 
@@ -14,7 +14,7 @@ post_headers = {
     'Content-Type':'application/json'
 }
 
-last_animal = {'id':''}
+last_animal = None
 
 def get_last_animal(feed_url):
     req = urllib.request.Request(url=feed_url)
@@ -34,8 +34,14 @@ def wait_for_new_animal(feed_url):
     global last_animal
     while True:
         an = get_last_animal(feed_url)
+        if last_animal == None:
+            last_animal = an
+            continue
         if an['id'] != last_animal['id']:
             last_animal = an
-            return an
+            return an['value']
         time.sleep(TIME_BETWEEN_POLLS)
-        
+
+while True:
+    animal = wait_for_new_animal(FARM_CHRIS)
+    print(animal)
