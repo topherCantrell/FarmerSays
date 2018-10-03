@@ -42,6 +42,7 @@ def wait_for_new_animal(feed_url):
             return an['value']
         time.sleep(TIME_BETWEEN_POLLS)
 
-while True:
-    animal = wait_for_new_animal(FARM_CHRIS)
-    print(animal)
+if __name__ == '__main__':
+    while True:
+        animal = wait_for_new_animal(FARM_CHRIS)
+        print(animal)

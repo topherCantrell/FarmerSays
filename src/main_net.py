@@ -3,6 +3,9 @@ import threading
 import hdw_farmer_says as HDW # Switches and motor
 import farm_audio as AUD      # Audio files
 import farm_adafruit_io as IO # Adafruit streams
+
+#WATCH_FARM = IO.FARM_CHRIS
+WATCH_FARM = IO.FARM_GARY
     
 def switch_changed(event):    
     animal = ANIMALS[event]    
@@ -37,7 +40,7 @@ AUD.play('Cat')
 HDW.spin_motor()
 
 while(True):
-    animal = IO.wait_for_new_animal(IO.FARM_GARY)
+    animal = IO.wait_for_new_animal(WATCH_FARM)
     if animal in VALID_ANIMALS:
         # Two threads: one to manage the audio and one to run the motor.
         t = threading.Thread(target=AUD.prompt_and_play,args=(animal,))
