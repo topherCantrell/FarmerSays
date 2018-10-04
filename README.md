@@ -10,7 +10,7 @@ https://github.com/garydion/FarmerSays
 
 # The Farmer Says
 
-This is what it looks like opened up. It is quite a mechanical marvel. The string pulls back a string connected to a gear arm. When the string is released, the string pulls the gear arm over a gear that spins the pointer.
+This is what it looks like opened up. It is quite a mechanical marvel. The string pulls back a spring connected to a gear arm. When the string is released, the spring pulls the gear arm over a gear that spins the pointer.
 
 When the string is pulled all the way out, the motion lifts the center wheel that pushes one of the 12 switches on the circuit board. Each switch is a different animal.
 
@@ -70,7 +70,7 @@ Here is the final circuit for my implementation.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/schematic.jpg)
 
-# Final Placement
+# Final placement
 
 The case is surprisingly spacious. There was plenty of room for all the boards.
 
