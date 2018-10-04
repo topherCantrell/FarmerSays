@@ -1,16 +1,18 @@
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/warp.jpg)
 
-# The Other End
+# A tale of two farms
+
+Mr. Gary Dion had a vision, and now it has come true! He dreamed of two "Farmer Says" toys connected over the Internet through [adafruit.io](https://io.adafruit.com/) feeds.
+
+He and I went different directions in our implementations. I used his design (and motor) to spin the pointer. Check out his awesome project:
 
 https://github.com/garydion/FarmerSays
 
 # The Farmer Says
 
-This is what it looks like opened up.
+This is what it looks like opened up. It is quite a mechanical marvel. The string pulls back a string connected to a gear arm. When the string is released, the string pulls the gear arm over a gear that spins the pointer.
 
-When you pull the string it winds a motor that spins the pointer as it unwinds. The
-center gear (on the right) has a nub that presses buttons on the circuit board (on
-the left):
+When the string is pulled all the way out, the motion lifts the center wheel that pushes one of the 12 switches on the circuit board. Each switch is a different animal.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/FarmerSays.jpg)
 
@@ -34,7 +36,11 @@ Then I replaced the rubber switch ring completing the board.
 
 # Adding a motor
 
+Gary gave me a small 5V friendly motor. Just like he did, I mounted the motor in the plastic case. I used a rubber band as a belt to turn the spinner with the motor.
+
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor.png)
+
+I used a Raspberry Pi Zero in my implementation. I used the motor hat from Adafruit to drive the motor:
 
 Motor Hat
 https://www.adafruit.com/product/2348
@@ -44,18 +50,34 @@ https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi
 
 # Audio
 
+I dug the guts out of a mini speaker amplifier to use in my project. The speaker is powered by USB, and I took the built-in battery off the circuit board. I connected the amp to the 5V rails powering my project.
+
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)
+
+The PiZero has no built-on audio support. I used a phat-dac to generate audio:
 
 https://pinout.xyz/pinout/phat_dac
 
 # Switches to the Pi
 
+One side of every switch on the original circuit board connects to a common ground. I connected it to 3.3V on the Pi instead. Then I connected the other side of each switch to a GPIO pin on the Pi. I used the Pi's built-in pull-down resistors on each line.
+
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
 
 # Schematic
+
+Here is the final circuit for my implementation.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/schematic.jpg)
 
 # Final Placement
 
+The case is surprisingly spacious. There was plenty of room for all the boards.
+
+The hole in the bottom of the case was for a failed external motor drive. Thanks to Gary for the idea and motor to mount inside the case.
+
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/final.jpg)
+
+# Software
+
+TODO
