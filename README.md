@@ -82,4 +82,4 @@ The hole in the bottom of the case was for a failed external-motor to drive the 
 
 # Software
 
-TODO
+The [hdw_farmer_says.py](src/hdw_farmer_says.py) file contains the code for the animal-switches and the motor driver.
