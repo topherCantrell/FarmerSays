@@ -111,12 +111,26 @@ The `prompt_and_play(animal)` function plays a prompt and a sound for the given 
   
 ## Adafruit feeds
 
-TODO
+The [farm_adafruit_io.py](src/farm_adafruit_io.py) module reads and writes animal entries from an adafruit.io feed. The secret AIO key is kept in a separate file `credentials.py` that is not checked in to the repo.
 
-## Main (Network)
+The `get_last_animal(feed_url)` reads the very last entry in the given feed.
 
-TODO
+The `post_animal(feed_url,animal)` posts the given animal entry to the given feed.
+
+The `wait_for_new_animal(feed_url)` waits for a new animal to appear in the given feed. This function does not return until a new value appears.
+
+The module includes named values for two feeds: FARM_CHRIS and FARM_GARY.
 
 ## Main (Solo)
 
-TODO
+The [main_solo.py](src/main_solo.py) module is the application entry for the stand-alone toy. The user turns the pointer to an animal and pulls the string. The spinner spins and the sound plays.
+
+The GPIO library calls `switch_changed()` when a button is pressed (when the string is pulled). This function starts two threads: one to spin the motor and one to play the sound.
+
+## Main (Network)
+
+The [main_solo.py](src/main_solo.py) module is the application entry for the network version of the toy. When the user pulls the string, the code posts the animal to my own adafruit.io feed for Gary's unit to see.
+
+The code watches Gary's adafruit.io feed for new animals. When a new animal comes in, the spinner turns and the sound plays.
+
+
