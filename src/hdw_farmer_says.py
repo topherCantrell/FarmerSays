@@ -17,17 +17,16 @@ S_3_00  = 25
 S_2_00  = 20
 S_1_00  = 16
 
-def init(pins, callback=None):
+def init(callback=None):
     """ Initialize the hardware
     
-    For a list of pins, configure the pins for input and register
+    Configure the pins for input and register
     a callback function to be called when the button is pressed.
     
     Initialize the motor driver.
     
     Parameters: 
     
-        pins: list of pins
         callback: the function to call when any switch is pressed
     
     """
@@ -41,13 +40,13 @@ def init(pins, callback=None):
     time.sleep(0.005)                     # Wait for oscillator
         
     GPIO.setmode(GPIO.BCM)
-    for s in pins:
+    for s in [S_12_00,S_11_00,S_10_00,S_9_00,S_8_00,S_7_00,S_6_00,S_5_00,S_4_00,S_3_00,S_2_00,S_1_00]:
         GPIO.setup(s, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         if callback:
             GPIO.add_event_detect(s, GPIO.RISING, callback=callback,bouncetime=1000)  
             
 def spin_motor():   
-    # Doing our best to simulate the string-pulling on the actual toy.
+    # Doing my best to simulate the string-pulling on the actual toy.
     # It starts out fast and tapers off to a stop
     # Start fast to get the motor going then fade
     set_motor(3000)

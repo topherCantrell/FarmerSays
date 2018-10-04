@@ -28,7 +28,7 @@ ANIMALS = {
     HDW.S_1_00   : 'Dog'
 } 
      
-HDW.init(ANIMALS,switch_changed) 
+HDW.init(switch_changed) 
 
 # Tell the user we are ready (it takes a few seconds
 # to initialize pygame and load the sounds).
