@@ -38,9 +38,11 @@ Then I replaced the rubber switch ring completing the board.
 
 Gary gave me a small 5V friendly motor. Just like he did, I mounted the motor in the plastic case. I used a rubber band as a belt to turn the spinner with the motor.
 
+I removed the gear arms and many of the screw towers. I moved the orange lever around closer to the string exit. This lever lifts the wheel to push the button on the circuit board. You can see the plastic nub that pushes the buttons when it lifts.
+
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor.png)
 
-I used a Raspberry Pi Zero in my implementation. I used the motor hat from Adafruit to drive the motor:
+I used a Raspberry Pi Zero as the brain in my implementation. I used the motor hat from Adafruit to drive the motor:
 
 Motor Hat
 https://www.adafruit.com/product/2348
@@ -60,7 +62,7 @@ https://pinout.xyz/pinout/phat_dac
 
 # Switches to the Pi
 
-One side of every switch on the original circuit board connects to a common ground. I connected it to 3.3V on the Pi instead. Then I connected the other side of each switch to a GPIO pin on the Pi. I used the Pi's built-in pull-down resistors on each line.
+One side of every switch on the original circuit board connects to a common ground. I connected it to 3.3V on the Pi instead. Then I connected the other side of each switch to a GPIO pin on the Pi. I used the Pi's built-in pull-down resistors on each input.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
 
@@ -74,7 +76,7 @@ Here is the final circuit for my implementation.
 
 The case is surprisingly spacious. There was plenty of room for all the boards.
 
-The hole in the bottom of the case was for a failed external motor drive. Thanks to Gary for the idea and motor to mount inside the case.
+The hole in the bottom of the case was for a failed external-motor to drive the spinner. Thanks to Gary for the idea and motor to mount inside the case.
 
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/final.jpg)
 
