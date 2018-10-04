@@ -82,4 +82,41 @@ The hole in the bottom of the case was for a failed external-motor to drive the 
 
 # Software
 
-The [hdw_farmer_says.py](src/hdw_farmer_says.py) file contains the code for the animal-switches and the motor driver.
+## Switches and the motor
+
+The [hdw_farmer_says.py](src/hdw_farmer_says.py) module contains the code for the animal-switches and the motor driver.
+
+The module includes names for the individual GPIO pins. For instance, `S_12_00 = 4` means that the switch at the 12:00 position is connected to GPIO 4. And `S_4_00 = 22` means the switch at the 4:00 position is connected to GPIO 22.
+
+The `init` function initializes all the pins and registers a callback on each rising edge. The physical buttons are fairly "bouncy", so the code uses a 1-second debounce time.
+
+The `spin_motor` function simulates the spinning action of the pointer. The code controls the motor for several seconds to spin it up and back down like the original toy.
+
+## Audio
+
+The [farm_audio.py](src/farm_audio.py) module manages the audio prompts. There are two types of files: prompt files like "The cow says ...", and sound files like "Mooooo".
+
+You can have as many audio files of each type as you like. The files are named with the animal name like:
+
+  - cow_prompt_1.wav
+  - cow_1.wav
+
+The code loads and sorts the audo files from the "audio" directory.
+
+The `get_animal_prompt(animal)` function returns the pygame sound object for the requested animal prompt. The code cycles through the files one by one with each call.
+
+The `get_animal_sound(animal)` function returns the pygame animal sound. Again, the code cycles through all the files one by one.
+
+The `prompt_and_play(animal)` function plays a prompt and a sound for the given animal. The function does not return until the sounds are played.
+  
+## Adafruit feeds
+
+TODO
+
+## Main (Network)
+
+TODO
+
+## Main (Solo)
+
+TODO
