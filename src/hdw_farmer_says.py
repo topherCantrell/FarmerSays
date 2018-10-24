@@ -45,7 +45,7 @@ def init(callback=None):
         if callback:
             GPIO.add_event_detect(s, GPIO.RISING, callback=callback,bouncetime=1000)  
             
-def spin_motor():   
+def _spin_motor_old():   
     # Doing my best to simulate the string-pulling on the actual toy.
     # It starts out fast and tapers off to a stop
     # Start fast to get the motor going then fade
@@ -55,6 +55,14 @@ def spin_motor():
     time.sleep(1)
     set_motor(800)
     time.sleep(1)
+    set_motor(None)
+    
+def spin_motor():   
+    # Doing my best to simulate the string-pulling on the actual toy.
+    # It starts out fast and tapers off to a stop
+    # Start fast to get the motor going then fade
+    set_motor(4000)
+    time.sleep(2)
     set_motor(None)
 
 def set_motor(speed):
