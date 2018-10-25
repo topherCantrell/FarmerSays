@@ -1,8 +1,10 @@
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/warp.jpg)
 
-As seen on show and tell:
+### As seen on Adafruit Show and Tell
 
 https://youtu.be/2_tfuIpfjrw?t=206
+
+![](art/seen.jpg)
 
 # A tale of two farms
 
