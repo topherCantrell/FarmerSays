@@ -1,5 +1,9 @@
 ![](https://github.com/topherCantrell/FarmerSays/blob/master/art/warp.jpg)
 
+As seen on show and tell:
+
+https://youtu.be/2_tfuIpfjrw?t=206
+
 # A tale of two farms
 
 Mr. Gary Dion had a vision, and now it has come true! He dreamed of two "Farmer Says" toys connected over the Internet through [adafruit.io](https://io.adafruit.com/) feeds.

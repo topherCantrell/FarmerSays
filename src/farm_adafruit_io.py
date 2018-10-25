@@ -7,7 +7,7 @@ import credentials # Not checked in ... simple KEY = VALUE module
 FARM_CHRIS = 'https://io.adafruit.com/api/v2/topher_cantrell/feeds/quantum-farmer-chris/data'
 FARM_GARY  = 'https://io.adafruit.com/api/v2/garydion/feeds/quantum-farmer-gary/data'
 
-TIME_BETWEEN_POLLS = 1 # 2 Seconds
+TIME_BETWEEN_POLLS = 2 # 2 Seconds
 
 # TODO eat exceptions instead of killing the program
 
@@ -35,13 +35,20 @@ def post_animal(feed_url,animal):
 def wait_for_new_animal(feed_url):
     global last_animal
     while True:
-        an = get_last_animal(feed_url)
-        if last_animal == None:
-            last_animal = an
-            continue
-        if an['id'] != last_animal['id']:
-            last_animal = an
-            return an['value']
+        try:
+            an = get_last_animal(feed_url)
+            if last_animal == None:
+                last_animal = an      
+                print('First animal '+str(an))          
+                continue
+            if an['id'] != last_animal['id']:
+                last_animal = an
+                print('New animal '+str(an))
+                return an['value']
+            else:
+                print('Animal '+str(an)+' is not new')
+        except Exception as ex:
+            print('Ignoring exception '+str(ex))            
         time.sleep(TIME_BETWEEN_POLLS)
 
 if __name__ == '__main__':
