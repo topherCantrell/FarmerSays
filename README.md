@@ -22,7 +22,7 @@ This is what it looks like opened up. It is quite a mechanical marvel. The strin
 
 When the string is pulled all the way out, the motion lifts the center wheel that pushes one of the 12 switches on the circuit board. Each switch is a different animal.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/FarmerSays.jpg)
+![](art/FarmerSays.jpg)
 
 # Accessing the switches
 
@@ -32,15 +32,15 @@ common connection to all the switches.
 
 I used an exacto knife to cut all the traces from the switches to the original circuit:
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/top.jpg)
+![](art/top.jpg)
 
 I used superglue to hold the wires in place on the bottom of the board:
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/bottom.jpg)
+![](art/bottom.jpg)
 
 Then I replaced the rubber switch ring completing the board. 
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/switches.jpg)
+![](art/switches.jpg)
 
 # Adding a motor
 
@@ -48,7 +48,7 @@ Gary gave me a small 5V friendly motor. Just like he did, I mounted the motor in
 
 I removed the gear arms and many of the screw towers. I moved the orange lever around closer to the string exit. This lever lifts the wheel to push the button on the circuit board. You can see the plastic nub that pushes the buttons when it lifts.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/motor.png)
+![](art/motor.png)
 
 I used a Raspberry Pi Zero as the brain in my implementation. I used the motor hat from Adafruit to drive the motor:
 
@@ -62,7 +62,7 @@ https://learn.adafruit.com/adafruit-dc-and-stepper-motor-hat-for-raspberry-pi
 
 I dug the guts out of a mini speaker amplifier to use in my project. The speaker is powered by USB, and I took the built-in battery off the circuit board. I connected the amp to the 5V rails powering my project.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/audio.jpg)
+![](art/audio.jpg)
 
 The PiZero has no built-on audio support. I used a phat-dac to generate audio:
 
@@ -72,13 +72,13 @@ https://pinout.xyz/pinout/phat_dac
 
 One side of every switch on the original circuit board connects to a common ground. I connected it to 3.3V on the Pi instead. Then I connected the other side of each switch to a GPIO pin on the Pi. I used the Pi's built-in pull-down resistors on each input.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/piswitches.jpg)
+![](art/piswitches.jpg)
 
 # Schematic
 
 Here is the final circuit for my implementation.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/schematic.jpg)
+![](art/schematic.jpg)
 
 # Final placement
 
@@ -86,7 +86,7 @@ The case is surprisingly spacious. There was plenty of room for all the boards.
 
 The hole in the bottom of the case was for a failed external-motor to drive the spinner. Thanks to Gary for the idea and motor to mount inside the case.
 
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/final.jpg)
+![](art/final.jpg)
 
 # Software
 
