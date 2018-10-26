@@ -6,6 +6,8 @@ https://youtu.be/2_tfuIpfjrw?t=206
 
 ![](art/seen.jpg)
 
+https://blog.adafruit.com/2018/10/25/two-farmer-says-toys-connected-over-the-internet-via-adafruit-io-adafruitio-showandtell/
+
 # A tale of two farms
 
 Mr. Gary Dion had a vision, and now it has come true! He dreamed of two "Farmer Says" toys connected over the Internet through [adafruit.io](https://io.adafruit.com/) feeds.
