@@ -8,3 +8,7 @@ with one coin in each hand. Use left, user right, get right, use right.
 The machine does not give change. It eats your change.
 
 ![](controls.jpg)
+
+# Vertiv
+
+![](map.jpg)

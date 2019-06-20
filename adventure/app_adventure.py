@@ -1,53 +1,88 @@
+
+def _com_GOTO(script, inp, raw_script, raw_input):
+    GAME['current_room'] = script[1]
+
+
+def _com_check_exit(inp, raw_input):
+    # If Al has had the soda ... you win
+    # Otherise you are turned around
+    pass
+
+
+def _com_check_junk(inp, raw_input):
+    # Find the nickel if it hasn't been discovered yet
+    pass
+
+
+def _com_GET(script, inp, raw_script, raw_input):
+    print("GET NOT IMPLEMENTED")
+
+
+def _com_DROP(script, inp, raw_script, raw_input):
+    print("DROP NOT IMPLEMENTED")
+
+
+OBJECTS = {
+    'quarter': {'location': 'hidden'},
+    'dime': {'location': 'hidden'},
+    'nickel': {'location': 'hidden'},
+    'wrench': {'location': 'cubes'},
+    'watergun': {'location': 'wenxiao'},
+    'k8s': {'location': 'hidden'}
+}
+
 ROOMS = {
 
-    "room1": {
-        'description': 'You are in the first room.',
-        'description_audio': 'bark.wav',
+    'lobby': {
+        'description': 'This is the lobby where Al sits.',
+        'audio': 'a.wav',
         'commands': {
-            'south': 'GOTO room2',
-            'north': 'PRINT It is way too cold!'
+            'south': 'GOTO lab',
+            'west': 'GOTO 2nd_landing',
+            'east': 'GOTO 1st_hall',
+            'north': _com_check_exit
         }
     },
 
-    "room2": {
-        'description': 'You are in the second room.',
-        'description_audio': 'bark.wav',
+    'lab': {
+        'description': 'The lab. Junk bins. A to dumpster dive.',
+        'audio': 'b.wav',
         'commands': {
-            'north': 'GOTO room1',
-            'south': 'PRINT It is way too hot!'
+            'north': 'GOTO lobby',
+            'east': 'GOTO break',
+            'A': _com_check_junk
         }
     },
+
+    'break': {},
+    'vending': {},
+    'cubes': {},
+    '1st_hall': {},
+    'conference': {},
+
+    '2nd_landing': {},
+    '2nd_hall_west': {},
+    '2nd_hall_east': {},
+    'wenxiao': {},
+
+    '3rd_landing': {},
+    'engineering': {},
+    'devops': {}
 
 }
 
 
-def _com_GET(script_words, inp_words, raw_script, raw_input):
-    print("GET NOT IMPLEMENTED")
+SCRIPT_COMMANDS = {  # Map script text commands to real functions
+    'GOTO': _com_GOTO
+}
 
-
-def _com_GET(script_words, inp_words, raw_script, raw_input):
-    print("DROP NOT IMPLEMENTED")
-
-
-def _com_PRINT(script_words, inp_words, raw_script, raw_input):
-    print(raw_script[6:])
-
-
-def _com_GOTO(script_words, inp_words, raw_script, raw_input):
-    GAME['current_room'] = script_words[1]
-
-
-COMMANDS = {
-    'GOTO': _com_GOTO,
-    'PRINT': _com_PRINT,
+DEFAULT_COMMANDS = {  # These are always available
     'GET': _com_GET,
     'DROP': _com_DROP,
 }
 
-DEFAULT_COMMANDS = ['GET', 'DROP']
-
 GAME = {
-    "current_room": 'room1'
+    "current_room": 'lobby'
 }
 
 
@@ -56,7 +91,7 @@ def get_input():
     return ret
 
 
-def handle_current_room(room):
+def handle_current_room():
     node = ROOMS[GAME['current_room']]
     print(node['description'])
     raw_input = get_input()
@@ -64,15 +99,17 @@ def handle_current_room(room):
     inp[0] = inp[0].lower()
     if inp[0] in node['commands']:
         raw_script = node['commands'][inp[0]]
-        script_com = raw_script.split(' ')
-        COMMANDS[script_com[0]](script_com, inp, raw_script, raw_input)
+        if callable(raw_script):
+            raw_script(inp, raw_input)
+        else:
+            script_com = raw_script.split(' ')
+            script_com[0] = script_com[0].upper()
+            SCRIPT_COMMANDS[script_com[0]](script_com, inp, raw_script, raw_input)
         return True
     else:
         print("I don't understand.")
         return False
 
 
-cur_room = 'room1'
-
 while True:
-    handle_current_room(cur_room)
+    handle_current_room()
