@@ -1,21 +1,34 @@
 ROOMS = {
 
-    "room1" : {
-        'description' : 'You are in the first room.',
-        'description_audio' : 'bark.wav',
-        'commands' : {
-            'south' : 'GOTO room2'
-            }
-        },
-    
-    "room2" : {
-        'description' : 'You are in the second room.',
-        'description_audio' : 'bark.wav',
-        'commands' : {
-            'north' : 'GOTO room1'
-            }
-        },    
-    
+    "room1": {
+        'description': 'You are in the first room.',
+        'description_audio': 'bark.wav',
+        'commands': {
+            'south': 'GOTO room2'
+        }
+    },
+
+    "room2": {
+        'description': 'You are in the second room.',
+        'description_audio': 'bark.wav',
+        'commands': {
+            'north': 'GOTO room1'
+        }
+    },
+
+}
+
+GAME = {
+    "current_room": 'room1'
+}
+
+
+def _com_GOTO(script_words, inp_words):
+    GAME['current_room'] = script_words[1]
+
+
+COMMANDS = {
+    'GOTO': _com_GOTO
 }
 
 
@@ -23,21 +36,23 @@ def get_input():
     ret = input('command: ')
     return ret
 
-def handle_room(room):
-    node = ROOMS[room]
+
+def handle_current_room(room):
+    node = ROOMS[GAME['current_room']]
     print(node['description'])
     inp = get_input()
-    if inp in node['commands']:
-        print('OK')
-        com = node['commands'][inp]
-        if com.startswith('GOTO '):
-            return com[5:]
+    inp = inp.split(' ')
+    inp[0] = inp[0].lower()
+    if inp[0] in node['commands']:
+        script_com = node['commands'][inp[0]].split(' ')
+        COMMANDS[script_com[0]](script_com, inp)
+        return True
     else:
         print("I don't understand.")
-        return room
+        return False
+
 
 cur_room = 'room1'
 
 while True:
-    nr = handle_room(cur_room)
-    cur_room = nr
+    handle_current_room(cur_room)
