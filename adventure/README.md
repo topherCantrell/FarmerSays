@@ -51,7 +51,7 @@ landing is to the WEST. This room continues to the EAST.
 > **engBrad.wav:** Brad Lanford is pacing nervously outside his cube and says, "I forgot my password! I know I used the name of the guy on the
 dime, but what's his name? I can't remember!"
 
-> **engShowDime.wav:** What have you got there? A DIME! Oh yeah ... "Roosevelt". How can I ever thank you? I know -- I have this extra Kubelet. You are 
+> **engShowDime.wav:** What have you got there? A DIME! Oh yeah ... "Roosevelt". How can I ever thank you? I know -- I have this extra Kubelet process. You are 
 welcome to take it with you. Now if you'll excuse me, I'm off to play some foosball.
 
 > **kubeletShort.wav:** Kubelet
