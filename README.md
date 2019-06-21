@@ -1,4 +1,4 @@
-![](https://github.com/topherCantrell/FarmerSays/blob/master/art/warp.jpg)
+![](art/warp.jpg)
 
 ### As seen on Adafruit Show and Tell
 
@@ -7,6 +7,8 @@ https://youtu.be/2_tfuIpfjrw?t=206
 ![](art/seen.jpg)
 
 https://blog.adafruit.com/2018/10/25/two-farmer-says-toys-connected-over-the-internet-via-adafruit-io-adafruitio-showandtell/
+
+An adventure game on this hardware: [https://github.com/topherCantrell/vertiv-01-stovehouse-plans](https://github.com/topherCantrell/vertiv-01-stovehouse-plans)
 
 # A tale of two farms
 
