@@ -1,10 +1,8 @@
 ![](art/warp.jpg)
 
 ### As seen on Adafruit Show and Tell
-
+[![](art/adafruit.jpg)](https://www.adafruit.com/) <br>
 https://youtu.be/2_tfuIpfjrw?t=206
-
-![](art/seen.jpg)
 
 https://blog.adafruit.com/2018/10/25/two-farmer-says-toys-connected-over-the-internet-via-adafruit-io-adafruitio-showandtell/
 
