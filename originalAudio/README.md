@@ -2,5 +2,5 @@
 
 | Animal | Prompt + Sound | Prompt | Sound |
 | ------ | -------------- | ------ | ----- |
-| Rooster | [roosterPromptSound.wav](roosterPromptSound.wav) | [roosterPrompt.wav](roosterPrompt.wav) | [roosterSound.wav](roosterSound.wav) |
-| Pig     | [pigPromptSound.wav](pigPromptSound.wav) | [pigPrompt.wav](pigPrompt.wav) | [pigSound.wav](pigSound.wav) |
+| Rooster | [roosterPromptSound.mp3](roosterPromptSound.mp3) | [roosterPrompt.mp3](roosterPrompt.mp3) | [roosterSound.mp3](roosterSound.mp3) |
+| Pig     | [pigPromptSound.mp3](pigPromptSound.mp3) | [pigPrompt.wav](pigPrompt.mp3) | [pigSound.mp3](pigSound.mp3) |
