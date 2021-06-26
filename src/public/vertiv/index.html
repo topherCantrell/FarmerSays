@@ -1,0 +1,210 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The Vertiv Adventures 1</title>
+  <meta name="description" content="The Vertiv Adventures part 1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  
+</head>
+
+<body>
+
+<div class="container" style="padding-top:8px">    
+    <div class="row" style="padding-bottom:8px">    	
+    	<div class="col-sm">
+    	<h2>Vertiv Adventures Part 1: The Stovehouse Plans</h2>
+    	Project: <a href="https://github.com/topherCantrell/vertiv-01-stovehouse-plans">https://github.com/topherCantrell/vertiv-01-stovehouse-plans</a><br>
+    	Audio Resources: <a href="audio/resources.html">audio/resources.html</a><br>
+    	Scripts: <a href="OBJECTS.json">OBJECTS.json</a> <a href="ROOMS.json">ROOMS.json</a><br>
+    	<button type="button" class="btn btn-outline-secondary btn-sm" onclick="toggleGameState()">Game State</button>
+    	</div>
+   	</div>
+   	<div id="gameStateView" class="row" style="padding-bottom:8px;display:none">    	
+    	<div class="col-sm">
+    		<textarea id="gameState" rows="10" cols="70">{}</textarea>
+    	</div>
+    </div>
+   	<div class="row start-area" style="margin-bottom:8px">
+   		<div class="col-sm">
+   		Click START to Begin
+   		</div>
+   	</div>   	
+   	<div class="row">
+	   	<div class="col-sm-6 text-area" style="display: none">
+		   	<textarea id="textoutput" rows="20" cols="70"></textarea>
+	   	</div>
+	   	<div class="col-sm-4 input-area" style="display: none;margin-bottom:8px">
+	   		<img src="controls.jpg" onclick="inputClick()">
+	   	</div>	   
+   	</div>
+   	<div class="row audio-area" style="display: none">
+	   	<div class="col-sm-3">
+	   		<audio id='audio' controls></audio>
+	   	</div>
+	   	<div id='audio-name' class="col-sm-4" style='margin-top:14px;margin-left:30px'></div>
+	</div>
+	<div class="row">
+	   	<div class="col-sm-2">
+		   	<input id="out-audio" type="radio" id="audio_only" name="output" value="audio" onchange="outputChanged('audio')">
+			<label for="audio_only">Audio only</label><br>
+	   		<input id="out-text" type="radio" id="text_only" name="output" value="text" onchange="outputChanged('text')">
+			<label for="text_only">Text only</label><br>
+			<input id="out-both" type="radio" id="both" name="output" value="text" checked onchange="outputChanged('both')">
+			<label for="both">Text and audio</label>
+	   	</div>	   	
+   	</div>
+   	<div class="row start-area">
+   		<div class="col-sm">
+   		<button type="button" class="btn btn-primary" onclick="start()">Start</button>
+   		</div>
+   	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+
+var started = false
+
+var state = {}
+
+var clickAngles = [2.888, 2.363, 1.832, 1.307, 0.782, 0.257, -0.261, -0.785, -1.303, -1.831, -2.353, -2.874]
+var clickRadius = [146.2, 243.0]
+var clickCommands = ['USERIGHT','GETRIGHT','EAST','DROPRIGHT','LOOK',
+	'SOUTH','ACTION','DROPLEFT','WEST','GETLEFT','USELEFT','NORTH']
+
+function inputClick() {
+	var x = event.offsetX-250
+	var y = 250 - event.offsetY
+	var r = Math.sqrt(x*x + y*y)
+	var rad = Math.atan2(y,x)
+	
+	// console.log(r+','+rad)
+	
+	if(r>clickRadius[0] && r<clickRadius[1]) {
+		var sel = 11
+		for(var i=0;i<clickAngles.length-1;++i) {
+			if(rad<clickAngles[i] && rad>clickAngles[i+1]) {
+				sel = i
+				break
+			}			
+		}
+		sel = sel + 10
+		if(sel>12) {
+			sel = sel-12
+		}
+		
+		// console.log(sel)
+		
+		action(clickCommands[sel-1])
+	}
+	
+}
+
+function toggleGameState() {
+	$('#gameStateView').toggle()
+}
+
+function handleGameResponse(data) {
+	state = data.state
+	$('#gameState').val(JSON.stringify(state,null,2))	
+	//console.log(data)
+	var ta = $('#textoutput')
+	ta.val(ta.val()+data.text)
+	ta.scrollTop(ta[0].scrollHeight)
+	if($('#out-audio:checked').val() || $('#out-both:checked').val()) {
+		if(data.audio.length>0) {
+			playAudio(data.audio)
+		}
+	}
+}
+
+function sendCommand(cmd) {
+	state = JSON.parse($('#gameState').val())
+	var req = {
+		world: "vertiv",
+	    state: state,
+	    user_command: cmd			
+	}	
+	console.log(req)
+	$.ajax({
+		url : '/play',
+		data : JSON.stringify(req),
+		contentType : 'application/json',
+		type: 'POST',
+		success: handleGameResponse
+	})	
+}
+
+function action(cmd) {
+	g = '\n** '+cmd.toUpperCase()+' **\n\n'
+	$('#textoutput').val($('#textoutput').val()+g)
+	sendCommand(cmd)
+}
+
+function start() {
+	
+	started = true
+	
+	$('.start-area').hide()
+	$('.input-area').show()
+	
+	if($('#out-text:checked').val() || $('#out-both:checked').val()) {
+		$('.text-area').show()
+	}
+	if($('#out-audio:checked').val() || $('#out-both:checked').val()) {
+		$('.audio-area').show()
+	}
+	
+	sendCommand('LOOK')
+			
+}
+
+function outputChanged(value) {
+	if(!started) {
+		return
+	}
+	if(value=='audio') {
+		$('.text-area').hide()
+		$('.audio-area').show()
+	} else if(value=='text') {
+		$('.text-area').show()
+		$('.audio-area').hide()
+	} else {
+		$('.text-area').show()
+		$('.audio-area').show()
+	}
+}
+
+var pos
+var prompts
+function playAudio(prs) {
+	pos=0
+	prompts = prs
+	audio = $('#audio')[0]
+	var pr = prompts[pos++]
+	$('#audio-name').html(pr)
+	audio.src = '/vertiv/audio/'+pr
+	audio.onended = function() {
+		if(pos<prompts.length) {
+			audio.pause()
+			pr = prompts[pos++]
+			$('#audio-name').html(pr)
+			audio.src = '/vertiv/audio/'+pr
+			audio.play()
+		}
+	}
+	audio.play()
+}
+
+</script>  
+  
+</body>
+
+</html>

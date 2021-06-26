@@ -1,0 +1,441 @@
+{
+
+"default" : {
+    "messages": {    
+        "title": "<title> VERTIV ADVENTURES -- PART 1: The Stovehouse Plans@@",
+        "introduction": "<intro> Good morning, Vertiv Employee! I have an important mission for you. These are the floor plans for our new Stovehouse space. I am entrusting them to you. Please take them to the builders at Stovehouse as soon as possible. Feel free to use the Avocent Van parked out front. Here are the keys. Remember: the whole company is counting on you! Good luck!@@",
+        "win": "<win> After your long adventure, you climb into the Avocent Van and drive away. The floor plans are on their way to Stovehouse! Thank you, Vertiv Employee!",
+        "miscLeftHand": "<miscLeftHand> @In your left hand:",
+        "miscRightHand": "<miscRightHand> @In your right hand:",
+        "ok": "<miscOK> OK",
+        "nothing_happens": "<miscNOP> Nothing happens.",
+        "hand_is_full": "<miscHandFull> That hand already has something in it.",
+        "hand_is_empty": "<miscHandEmpty> You aren't holding anything in that hand.",
+        "nothing_to_get": "<miscNoObj> There is nothing to pick up.",
+        "no_way": "<miscNoWay> You can't go that direction.",
+        "watergunUseFull": "<miscWatergunUseFull> With a guttural yell, you empty the gun onto the walls, floor, and yourself. Everything is wet except what you were aiming at.",
+        "watergunUseEmpty": "<miscWatergunUseEmpty> You squeeze the trigger frantically. The gun coughs and sputters, but there is no water in it.",
+        "beepGood": "<miscBeepGood> -",
+        "beepBad": "<miscBeepBad> -"    
+    },
+
+	"objects": [],
+
+	"commands": [
+	        
+	    "north", "say no_way",
+	    "south", "say no_way",
+	    "east", "say no_way",
+	    "west", "say no_way",
+	
+	    "look", "generalDescribeRoom",
+
+	    "action", "say nothing_happens",
+	
+	    "get * - *", "say nothing_to_get", 
+	    "get * * -", [ 
+	        "sound",
+	        "generalGet",
+	        "say ok"
+	    ],
+	    "get * * *", "say hand_is_full",  
+	           
+	    "use * empty_watergun", [
+	        "sound",
+	        "say watergunUseEmpty"
+	    ],
+	    "use * watergun", [
+	        "sound",
+	        "replace watergun with empty_watergun",
+	        "say watergunUseFull"
+	    ],
+	
+	
+	    "use * -", "say hand_is_empty", 
+	    "use * *", [
+	        "sound",
+	        "say nothing_happens"
+	    ], 
+	
+	    "drop * -", "say hand_is_empty", 
+	    "drop * *", [ 
+            "sound",
+	        "generalDrop",
+	        "say ok"
+	    ],
+	
+		"AT_START", [
+		    "move keys to _",
+		    "move plans to _",
+		    "move soda to _",
+		    "move wrench to _",
+		    "move watergun to _",
+		    "move nickel to _",
+		    "move dime to _",
+		    "move quarter to _",
+		    "move #movedcoin# to _",
+		    "move #foundquarter# to _",
+		    "move kubelet to _",
+		    "move plant_medium to _",
+		    "move plant_large to _",
+		    "move mike to _",
+		    "move fountain to _",
+		    		    		    
+		    "move plant_small to 2ndLanding",
+		    "move mike_stuck to Devops",
+		    "move brokenfountain to 2ndHallWest",		    
+		    "move broken_desk to Conference",		    
+		    "move need_soda to Lobby",		    
+		    "move david to Cubes",
+		    "move brad to Engineering",
+		    
+		    "move empty_watergun to Wenxiao",
+		    
+		    "say title",
+		    "say introduction",	    		    	    		    
+		    
+		    "move plans to _left_hand",
+		    "move keys to _right_hand",
+		    		    
+		    "goto Lobby"
+		],
+		
+		"AFTER_EVERY", ""
+	
+	]	
+},
+
+"Lobby": {
+    "description": "say <lobbyDesc> You are in the main lobby. Al watches you suspiciously from behind his desk. He has one hand on his handcuffs. A dark stairway to the west leads up. A glass door leads out of the building to the north. Metal doors lead east and south.",
+    "commands": [                
+	    "south", "goto Lab",
+	    "west", "goto 2ndLanding",
+	    "east", "goto 1stHall",
+	    "north", [
+	        "if need_soda is _here", [
+	            "say lobby_no_soda",
+	            "done"
+	        ],
+	        "if keys is in_hand", [
+	            "if plans is in_hand", [
+		            "say win",
+		        	"restart",
+		        	"done"
+	            ],
+	            "say wait",
+	            "done"        	
+	        ],
+	        "say wait"
+	    ],
+	    "use * soda", [
+	        "sound",
+	        "say lobby_use_soda",
+	        "move soda to _",
+	        "move need_soda to _"
+	    ]	    
+    ],    
+    
+    "messages": {
+    	"lobby_no_soda": "<lobbyNoSoda> The door won't open. Al says he can't unlock the door because his blood sugar is too low. He nods off briefly.",
+    	"lobby_use_soda": "<lobbyUseSoda> Al drinks the soda in one long gulp and says \"All right! That hit the spot. Thank you!\"",
+    	"wait": "<lobbyNoKeysPlans> Wait! You can't go without the floor plans and the keys to the van!"
+    },
+    
+    "objects": []
+},
+
+"1stHall": {
+    "description": "say <firstHallDesc> You are in a long hallway with pictures on the wall. The hall continues east. There is a metal door to the west. The Global Conference room is through a door to the north.",
+    "commands": [
+        "east", "goto Cubes",
+        "north", "goto Conference",
+        "west", "goto Lobby"
+    ],    
+    "objects": []
+},
+
+"Conference": {
+    "description": "say <confDesc> This is the global conference room. There is a sample desk for Stovehouse in the middle of the room.",
+    "commands": [
+        "south","goto 1stHall",
+        "use * wrench", [
+            "if broken_desk is _here", [
+                "sound",
+                "say <confDropDime> As you loosen a bolt on the desk, a scratched-up dime falls out of the motor assembly. The desk is working again! Good job!",
+                "move dime to _here",
+                "move broken_desk to _",
+                "done"
+            ],
+            "do"
+        ]
+    ],    
+    "objects": []
+},
+
+"Cubes": {
+    "description": "say <cubesDesc> You are in a long hallway of cube offices. You can go north and south.",
+    "commands": [
+        "south","goto Break",
+        "north","goto 1stHall",
+        "use * watergun", [
+            "if david is _here", [                
+                "say <cubesDropWrench> David sees your water gun and stops you before you can pull the trigger. He says \"Avast! I can't get water on me shirt before my meeting. Here is ye treasure for beating Pirate Dave!\" He drops the wrench on the floor ands skulks away.",
+                "move wrench to _here",
+                "move david to _",
+                "done"                
+            ],
+            "do"
+        ]
+    ],
+    
+    "objects": []
+},
+
+"Break": {
+    "description": "say <breakDesc> This is the breakroom. The coffee pot is burbling away while sleepy-eyed engineers wait patiently. A hallway continues north. The vending machines are to the south. You can see a large manufacturing area to the west.",
+    "commands": [
+        "south","goto Vending",
+        "north","goto Cubes",
+        "west","goto Lab"
+    ],
+    "objects": []
+},
+
+"#machine#": {
+    "objects": []
+},
+"Vending": {
+    "description": "say <vendDesc> You are in front of a large vending machine. The Price is Right is playing on the TV above it. A signed taped to the front of the glass reads: One day only! Soda: 40 cents!",
+    "commands": [
+        "north", [            
+            "if nickel is #machine#", [
+                "move nickel to rand(Cubes,Break,Lab)",
+                "move #movedcoin# to _here"
+            ],
+            "if dime is #machine#", [
+                "move dime to rand(Cubes,Break,Lab)",
+                "move #movedcoin# to _here"
+            ],
+            "if quarter is #machine#", [
+                "move quarter to rand(Cubes,Break,Lab)",
+                "move #movedcoin# to _here"
+            ],
+            "if #movedcoin# is _here", [
+                "say <vendRollAway> As you leave, the vending machine makes a coughing noise and spits out your money. It rolls right past you, but it couldn't have gone far.",
+                "move #movedcoin# to _"
+            ],
+            "goto Break"
+       ],
+        "use * nickel", [
+            "sound",
+            "say vendCoin",
+            "move nickel to #machine#",
+            "if dime is #machine#", [
+                "if quarter is #machine#", [
+                    "move nickel to _",
+                    "move dime to _",
+                    "move quarter to _",
+                    "move soda to _here",
+                    "say vendDropSoda",
+                    "sound soda"
+                ]
+            ]
+        ],
+        "use * dime", [
+            "sound",
+            "say vendCoin",
+            "move dime to #machine#",
+            "if nickel is #machine#", [
+                "if quarter is #machine#", [
+                    "move nickel to _",
+                    "move dime to _",
+                    "move quarter to _",
+                    "move soda to _here",
+                    "say vendDropSoda",
+                    "sound soda"
+                ]
+            ]
+        ],
+        "use * quarter", [
+            "sound",
+            "say vendCoin",
+            "move quarter to #machine#",
+            "if dime is #machine#", [
+                "if nickel is #machine#", [
+                    "move nickel to _",
+                    "move dime to _",
+                    "move quarter to _",
+                    "move soda to _here",
+                    "say vendDropSoda",
+                    "sound soda"
+                ]
+            ]
+        ]
+    ],
+    "messages": {
+        "vendCoin": "<vendCoin> Ka-Ching! You put in your coin.",
+        "vendDropSoda": "<vendDropSoda> The vending machine flashes like a disco ball and begins to shake and bounce. You hear the sounds of gears and levers working magic deep inside. Finally, with a loud bang, your soda drops out the machine onto the floor. Ohhhh, that's gonna spew."
+    },
+    "objects": []
+},
+
+"Lab": {
+    "description": "say <labDesc> You are in a large manufacturing area that has been converted to a lab. There are doors to the north and east. Russ Langston is standing by a large cardboard trash bin. He's holding a corroded vial of some glowing-green liquid. He says \"Look! Someone threw away this red mercury! I'm going to make a warp drive if I can find a toroid in there. Yep, all kinds of useful things in there. You should definitely take a look!\"",
+    "commands": [
+        "north", "goto Lobby",
+        "east", "goto Break",
+        "look", [
+            "if #foundquarter# is _here", [
+                "do",
+                "done"
+            ],
+            "say <labDropCoin> You rummage around in the old electronics and cables. To your surprise, a quarter rolls out onto the floor.",
+            "move quarter to _here",
+            "move #foundquarter# to _here"
+        ]
+    ],    
+    "objects": []
+},
+
+
+
+
+
+"2ndLanding": {
+    "description": "say <secondLandDesc> This is the landing on the mezzanine floor. There has been a moving incident, and the stairs leading up are blocked with books on Java programming. You can go south back down the stairs. Or you can go east to the mezzanine hallway.",
+    "commands": [
+        "south", "goto Lobby",
+        "east", "goto 2ndHallWest",
+        "use * watergun", [
+            "sound",
+        	"replace watergun with empty_watergun",
+            "if plant_small is _here", [
+                "say secondLandPlantMotion",
+                "replace plant_small with plant_medium",
+                "done"
+            ],
+            "if plant_medium is _here", [
+                "say secondLandPlantMotion",
+                "replace plant_medium with plant_large",
+                "done"
+            ],
+            "if plant_large is _here", [
+                "say <secondLandWither> You have over-watered the plant. It withers back down to a short potted plant pleading: \"I need water.\"",
+                "replace plant_large with plant_small",
+                "done"
+            ]
+        ],
+        "use * -", [
+            "if plant_large is _here", [
+                "sound",
+                "say <secondLandClimbUp> You climb the plant stalk from the mezzanine up to the second floor landing.",
+                "goto 3rdLanding",
+                "done"
+            ],
+            "do"
+        ]
+    ],
+    "messages": {
+        "secondLandPlantMotion": "<secondLandPlantMotion> You squirt water on the plant and it erupts with a flurry of growth." 
+    },
+    "objects": []
+},
+
+"2ndHallWest": {
+    "description": "say <hallWestDesc> Alright, alright! You are at the west end of the mezzanine hall. The landing is to the west. The hall continues east. The bathrooms are all occupied (good thing you don't have to go).",
+    "commands": [
+        "east", "goto 2ndHallEast",
+        "west", "goto 2ndLanding",
+        "use * wrench", [
+            "if brokenfountain is _here", [
+                "sound",
+                "say <hallWestFixed> You twist a couple of bolts and SNAP! The water fountain is working again. Good job! Ever consider becoming a plumber?",
+                "move brokenfountain to _",
+                "done"
+            ],
+            "do"
+        ],
+        "use * empty_watergun", [
+            "if brokenfountain is _here", [
+                "do",
+                "done"
+            ],
+            "sound",
+            "say <miscWatergunFill> You carefully fill the gun from the water fountain. Now you are ready for business!",
+            "replace empty_watergun with watergun"        
+        ]
+    ],
+    "objects": []
+},
+
+"2ndHallEast": {
+    "description": "say <hallEastDesc> You are at the east end of the mezzanine hall. Donald is guarding the door to the stairwell. He says \"the stairs are closed -- we are performing drop-tests on the RDU\". The hall continues east. Wenxiao's office is to the south.",
+    "commands": [
+        "west", "goto 2ndHallWest",
+        "south", "goto Wenxiao"
+    ],    
+    "objects": []
+},
+
+"Wenxiao": {
+    "description": "say <wenxiaoDesc> You are in Wenxiao's office. She isn't here, but you have a spectacular view of the cornhole match below.",
+    "commands": [
+        "north", "goto 2ndHallEast"
+    ],    
+    "objects": []
+},
+
+"3rdLanding": {
+    "description": "say <thirdLandDesc> This is the second-floor landing. You wouldn't dare risk the deadfall of Java books in the stairwell, but you could climb down on the thick plant that reaches up from the landing below. You can also go east into the hallway.",
+    "commands": [
+        "east", "goto Engineering",
+        "use * -", [
+            "say <thirdLandClimbDown> You climb the plant back down to the second floor landing.",
+            "goto 2ndLanding"
+        ]
+    ],
+    "messages": {
+        "thirdLandClimbDown": ""
+    },
+    "objects": []
+},
+
+"Engineering": {
+    "description": "say <engDesc> Welcome to engineering. From every direction you hear the frantic typing of software development. The 3rd floor landing is to the west. This room continues to the east.",
+    "commands": [
+        "east", "goto Devops",
+        "west", "goto 3rdLanding",
+        "use * dime", [
+            "if brad is _here", [
+                "sound",
+                "say <engShowDime> What have you got there? A DIME! Oh yeah ... \"Roosevelt\". How can I ever thank you? I know -- I have this extra Kubelet process. You are welcome to take it with you. Now if you'll excuse me, I'm off to play some foosball.",
+                "move brad to _",
+                "move kubelet to _here",
+                "done"
+            ],
+            "do"
+        ]
+    ],
+    "objects": []
+},
+
+"Devops": {
+    "description": "say <devopsDesc> Welcome to DevOps! This warmly-lit area is sprinkled with cozy beanbag chairs and blankets. The door to the stairwell is locked. You can hear RDU's crashing on the other side. The only other obvious path is back to the west.",
+    "commands": [
+        "west", "goto Engineering",
+        "use * kubelet", [
+            "sound",
+            "if mike_stuck is _here", [                
+                "say <devopsDropCoin> The Kubelet process springs to life right before your eyes! The seven-arm Kubelet pulls crowbars from his back pocket and begins to pry Mike loose from the beanbag chair. With a sucking sound and a pop, Mike is free! Kubelet gives a victory dance and returns to your hand. Mike reaches into his pocket and pulls out a nickel as your reward!",
+                "move nickel to _here",
+                "replace mike_stuck with mike",
+                "done"
+            ],            
+            "say <devopsTransport> Kubelet springs to life again! It's seven arms blur with Mike's on the keyboard, and you feel a growing tingling sensation all over your body. You see Mike and Kubelet waving bye to you as your molecules are converted to electronic bits. You bounce around every corner of the Vertiv cloud for what seems like hours, but finally -- after a long layover in Columbus -- your bits return to the building and take physical form.",
+            "goto rand(1stHall,Cubes,Break,Lab)"
+        ]
+    ],    
+    "objects": []
+}
+
+}

@@ -1,0 +1,74 @@
+{
+
+	"butter": {
+	    "short": "<objButterShort> butter",  
+	    "long": "<objButterLong> There is a cup of butter here.",  
+	    "stuck": false,  
+	    "hidden": false  
+	},
+    "bread": {
+        "short": "<objBreadShort> bread",
+        "long": "<objBreadLong> There is a fresh loaf of bread sealed in a plastic bag."
+    },
+    "eggs": {
+        "short": "<objEggsShort> eggs",
+        "long": "<objEggsLong> There is a basket of eggs here."
+    },
+
+    "empty_water_gun": {
+        "short": "<objEmptyGunShort> empty water gun",
+        "long": "<objEmptyGunLong> There is an empty water gun here."
+    },
+    "water_gun": {
+        "short": "<objFullGunShort> full water gun",
+        "long": "<objFullGunLong> There is a water gun here. It is full of water!"
+    },
+
+    "balloon": {
+        "short": "<objBalloonShort> colorful, shiny balloon",
+        "long": "<objBalloonLong> There is a shiny, colorful balloon floating here."
+    },
+
+    "corn": {
+        "short": "<objCornShort> corn",
+        "long": "<objCornLong> There is an ear of corn on the ground."
+    },
+
+    "guarded_pail": {
+        "long": "<objGuardedPail> There is an empty pail here.",
+        "stuck": true
+    },
+    "pail": {
+        "short": "<objPailShort> empty pail",
+        "long": "<objPailLong> There is an empty pail here."
+    },
+    "pail_with_milk": {
+        "short": "<objPailMilkShort> pail with milk",
+        "long": "<objPailMilkLong> There is a pail here full of milk."
+    },
+
+    "churn": {
+        "long": "<objChurnLong> There is a large, heavy churn here -- perfect for making butter. If only you had some milk.",
+        "stuck": true
+    },
+
+    "empty_bowl": {
+        "long": "<descEmptyBowl> There is an empty bowl on the counter. The recipe says: crack eggs into bowl and whisk until smooth.",
+        "stuck": true
+    },
+    "bowl_with_eggs": {
+        "long": "<descBowlEggs> The eggs are ready! The recipe says: next, dip the bread in the eggs and cook the bread in a hot pan.",
+        "stuck": true
+    },
+    "plate_of_toast": {
+        "long": "<descToast> There is plate of delicious French toast here. You need some fresh butter to top it off!",
+        "stuck": true
+    },
+
+    "coyote": {
+        "long": ["<sndCoyote> {ARRROOOO!}",
+                 "<descCoyote> A big, bad, brown coyote hunches over the path leading north. He snarls at you and drools. Let's not go that way, please!"
+                ],
+        "stuck": true
+    }
+}

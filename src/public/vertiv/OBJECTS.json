@@ -1,0 +1,142 @@
+{
+
+    "need_soda": {
+        "short": "***",
+        "long": "***",
+        "hidden": true,
+        "stuck": true        
+    },
+    
+    "broken_desk": {
+        "short": "***",
+        "long": "<confStuck> The desk is supposed to raise. You press the buttons but something is jamming the motor. If only you had a tool to take the desk apart -- you might be able to get it working.",
+        "stuck": true 
+    },
+    
+    "david": {
+    	"short": "***",
+    	"long": "<cubesDavid> David Brockhaus lunges at you from one of the offices. He's holding a large wrench as if it's a sword. He squints one eye and says \"Arr! Have ye got a weapon to dual with Pirate Dave? Arr!\"",
+    	"stuck": true
+    },
+    
+    "brad": {
+        "short": "***",
+        "long": "<engBrad> Brad Lanford is pacing nervously outside his cube and says, \"I forgot my password! I know I used the name of the guy on the dime, but what's his name? I can't remember!\"",
+        "stuck": true
+    },
+    
+    "mike_stuck": {
+        "short": "***",
+        "long": "<devopsMikeStuck> Mike Hoffman waves frantically at you from a beanbag chair. He wiggles and squirms and says \"My Kubernetes cluster has died and now I am stuck here in this chair!\" Poor Mike. There must be something you can use to help him.",
+        "stuck": true
+    },
+    
+    "mike": {
+        "short": "***",
+        "long": "<devopsMikeWork> Mike Hoffman is standing at his desk working feverishly on cloud code. He bekons you over. \"Wanna help me test our new data-center molecular-transporter? (It should be safe.) But it takes nine hands to run the controls ... I only have two.\"",
+        "stuck": true
+    },
+    
+    "#movedcoin#": {
+        "short": "***",
+        "long": "***",
+        "hidden": true,
+        "stuck": true
+    },
+    
+    "#foundquarter#": {
+        "short": "***",
+        "long": "***",
+        "hidden": true,
+        "stuck": true
+    },
+    
+    "fountain": {
+        "short": "***",
+        "long" : "<hallWestFountain> There is a cool, refreshing water fountain here. Thanks to you, it is in perfect working condition.",
+        "stuck": true
+    },
+    
+    "brokenfountain": {
+        "short": "****",
+        "long": "<hallWestBroken> There is a water fountain here, but it has an out of order sign on it. Larry is working on it. Maybe you can find some tools and help him!",
+        "stuck": true
+    },
+    
+    "plant_small": {
+        "short": "***",
+        "long": "<secondLandPlant1> There is a short potted plant reaching upward near the railing pleading in a small voice: \"I need water.\"",
+        "stuck": true
+    },
+    "plant_medium": {
+        "short": "***",
+        "long": "<secondLandPlant2> There is a stout potted plant grown halfway up to the 3rd floor demanding: \"WATER! WATER!\"",
+        "stuck": true
+    },
+    "plant_large": {
+        "short": "***",
+        "long": "<secondLandPlant3> There is a thick potted plant reaching all the way up to the 3rd floor. You might be able to climb it with your bare hands!",
+        "stuck": true
+    },
+        
+    "plans": {
+	    "short": "<objPlansShort> floor plans",  
+	    "long": "<objPlansDesc> The Stovehouse floor plans are rolled up on the floor.",  
+	    "sound": "<objPlansSound>"
+	},
+	
+	"keys": {
+		"short": "<objKeysShort> keys to the van",
+		"long": "<objKeysDesc> The keys to the van are here.",
+		"sound": "<objKeysSound>"
+	},
+	
+	"quarter": {
+		"short": "<objQuarterShort> quarter",
+		"long": "<objQuarterDesc> There is a shiny quarter here.",
+		"sound": "<objQuarterSound>"
+	},
+	
+	"dime": {
+		"short": "<objDimeShort> dime",
+		"long": "<objDimeDesc> There is a scratched up dime here.",
+		"sound": "<objDimeSound>"
+	},
+	
+	"nickel": {
+		"short": "<objNickelShort> nickel",
+		"long": "<objNickelDesc> A nickel is here.",
+		"sound": "<objNickelSound>"
+	},
+	
+	"soda": {
+		"short": "<objSodaShort> soda",
+		"long": "<objSodaDesc> An unopened can of soda rests in the corner.",
+		"sound": "<objSodaSound>"
+	},
+	
+	"wrench": {
+		"short": "<objWrenchShort> wrench",
+		"long": "<objWrenchDesc> You see an oily wrench.",
+		"sound": "<objWrenchSound>"
+	},
+	
+	"watergun": {
+		"short": "<objWatergunShort> watergun",
+		"long": "<objWatergunDesc> There is a plastic watergun here!",
+		"sound": "<objWatergunSound>"
+	},
+	
+	"empty_watergun": {
+		"short": "<objWatergunShort> watergun",
+		"long": "<objWatergunDesc> There is a plastic watergun here!",
+		"sound": "<objWatergunSound>"
+	},
+	
+	"kubelet": {
+		"short": "<objKubeletShort> Kubelet",
+		"long": "<objKubeletDesc> There is a Kubelet process resting against the wall.",
+		"sound": "<objKubeletSound>"
+	}		
+	
+}

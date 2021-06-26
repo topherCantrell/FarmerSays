@@ -1,0 +1,29 @@
+{
+
+"default" : {
+    
+	"objects": [],
+
+	"commands": [
+	        
+	    "north", "say <sheepPromptSound>",
+	    "use right *", "say <dogPromptSound>",
+	    "get right * *", "say <duckPromptSound>",
+	    "east", "say <frogPromptSound>",
+	    "drop right *", "say <horsePromptSound>",
+	    "look", "say <coyotePromptSound>",
+	    "south", "say <roosterPromptSound>",
+	    "action", "say <pigPromptSound>",
+	    "drop left *", "say <cowPromptSound>",
+	    "west","say <birdPromptSound>",
+	    "get left * *", "say <catPromptSound>",
+	    "use left *", "say <turkeyPromptSound>",	    
+	
+		"AT_START", "",		
+		"AFTER_EVERY", ""
+	
+	]
+	
+}
+
+}

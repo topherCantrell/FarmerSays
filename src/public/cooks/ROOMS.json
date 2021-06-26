@@ -1,0 +1,336 @@
+{
+
+"default" : {
+    "messages": {
+        "miscNoWay": "<miscNoWay> You can't go that direction.",
+        "miscHandEmpty": "<miscHandEmpty> Your hand is empty.",
+        "miscNothingToGet": "<miscNothingToGet> There is nothing to get.",
+        "miscHandFull": "<miscHandFull> You already have something in that hand.",
+        "miscLeftHand": "<miscLeftHand> @In your left hand:",
+        "miscRightHand": "<miscRightHand> @In your right hand:",
+        "miscOK": "<miscOK> OK",
+        "miscNothingHappens": "<miscNothingHappens> Nothing happens.",
+        "miscUseGun": "<miscUseGun> With a hearty \"yeeee hawww!\", you excitedly pump the trigger of the water gun. When the gun is finally empty, you look around to find that everything, including you, is soaking wet. Nice shootin', Tex!",
+        "miscUseEmptyGun": "<miscUseEmptyGun> The empty water gun dribbles a drop or two onto your shoes. Maybe you can find some water to refill the gun.",
+        "introduction": "<introduction> @@It's a beautiful morning on the farm! You are sitting on the porch in your rocking chair watching the sun rise over the fields. Your stomach growls, and the dog on the porch beside you looks up. He's hungry too! @@\"Well alright, boy,\" you say as you stand. \"I'll go make us some French toast for breakfast!\"@@"
+    },
+
+	"objects": [],
+
+	"commands": [
+	        
+	    "north", "say miscNoWay",
+	    "south", "say miscNoWay",
+	    "east", "say miscNoWay",
+	    "west", "say miscNoWay",
+	
+	    "look", "generalDescribeRoom",
+
+	    "action", "say miscNothingHappens",
+	
+	    "get * - *", "say miscNothingToGet", 
+	    "get * * -", [ 
+	        "generalGet",
+	        "say miscOK"
+	    ],
+	    "get * * *", "say miscHandFull",  
+	           
+	    "use * empty_water_gun", "say miscUseEmptyGun",
+	    "use * water_gun", [
+	        "replace water_gun with empty_water_gun",
+	        "say miscUseGun"
+	    ],
+	
+	
+	    "use * -", "say miscHandEmpty", 
+	    "use * *", "say miscNothingHappens", 
+	
+	    "drop * -", "say miscHandEmpty", 
+	    "drop * *", [ 
+	        "generalDrop",
+	        "say miscOK"
+	    ],
+	
+		"AT_START", [
+		    "move butter to _",
+		    "move bread to Kitchen",
+		    "move eggs to _",
+		    "move empty_water_gun to Pigsty",
+		    "move water_gun to _",
+		    "move balloon to Tree",
+		    "move corn to Garden",
+		    "move guarded_pail to Yard",
+		    "move pail to _",
+		    "move pail_with_milk to _",
+		    "move churn to Parlor",
+		    "move empty_bowl to Kitchen",
+		    "move bowl_with_eggs to _",
+		    "move plate_of_toast to _",
+		    "move coyote to Meadow",
+		    "say introduction",		
+		    "goto Porch"
+		],
+		
+		"AFTER_EVERY", ""
+	
+	]
+	
+},
+
+"Porch": {
+    "description": ["say <descPorch1> You are on the front porch.",
+                    "say <sndDog> {BARK!}",
+                    "say <descPorch2> A lazy dog waits patiently for you to make breakfast. The kitchen is through a screen door to the East. The parlor is through the front door to the North. There is a large yard to the South."
+                   ],
+    "commands": [
+        "north", "goto Parlor",
+        "east", "goto Kitchen",
+        "south", "goto Yard",
+        "action", "restart"
+    ],
+    "objects": []
+},
+
+"Parlor": {
+    "description": ["say <descParlor1> This is the parlor.",
+                    "say <sndCat> {MEOW!}",
+                    "say <descParlor2> An orange cat has plopped down on the couch in front of the TV. Her empty milk bowl is on the floor beside you. A door to the south leads to the front porch."
+                   ],
+    "commands": [
+        "south", "goto Porch",
+        "use * pail_with_milk", [
+            "move butter to _here",
+            "replace pail_with_milk with pail",
+            "move butter to _here",
+            "say startChurn",
+            "say <churnSound>",
+            "say madeButter"
+        ],
+        "get * churn *", "say getChurn"
+    ],
+
+    "messages": {
+        "getChurn": "<getChurn> The churn won't budge.",
+        "startChurn": "<startChurn> You pour some of the milk into the cat's bowl. She jumps down and laps at it as you pour the rest of the milk into the churn. Then you vigorously work the churn's plunger.",
+        "madeButter": "<madeButter> After a few minutes of churning, you've made butter! You spoon it into a clean cup beside the churn."
+    },
+
+    "objects": ["churn"]
+},
+
+"Kitchen": {
+    "description": "say <descKitchen> You are in the kitchen. Your famous French toast recipe is on the counter. The recipe calls for butter, bread, and eggs.",
+    "commands": [
+        "west", "goto Porch",
+        "use * eggs", [
+            "move eggs to _",
+            "replace empty_bowl with bowl_with_eggs",
+            "say <addedEggs> You add the eggs to the bowl and whisk them smooth!"
+        ],
+        "use * bread", [
+            "if bowl_with_eggs is _here", [
+                "move bread to _",
+                "replace bowl_with_eggs with plate_of_toast",
+                "say <addedBread> You soaked four pieces of bread in the eggs while a pan was heating on the stove. Then you cooked the toast and stacked it onto a plate.",
+                "done"
+            ],
+            "say followRecipe"
+        ],
+        "use * butter", [
+            "if plate_of_toast is _here", [
+                "say <youWon> You slather the toast with fresh butter and syrup. Mmmmmmm. You carry the plate of toast and the dog's bowl out to the porch and sit down in your rocking chair beside the dog. You carefully place the top piece of toast in the dog's bowl and say, \"Breakfast is served!\". Congratulations! You won!",
+                "restart",
+                "done"
+            ],
+            "say followRecipe"
+        ]
+    ],
+    "messages": {
+        "followRecipe": "<followRecipe> That is not what your famous recipe says to do."
+    },
+    "objects": ["empty_bowl", "bread"]
+},
+
+"Yard": {
+    "description": ["say <descYard1> You are standing in a grassy yard.",
+                    "say <sndTurkey> {GOBBLE!}",
+                    "say <descYard2> A large turkey struts around at your feet and pecks an old, dry corncob. The porch is to the north. A small stream babbles to the south. The barn is to the west. From the east, you smell the pigsty."
+                   ],                   
+    "commands": [
+        "west", "goto Barn",
+        "east", "goto Pigsty",
+        "north", "goto Porch",
+        "south", "goto Stream",
+        "get * guarded_pail *", [
+            "say <turkeyGuards> The turkey thinks you are after his corncob! He chases you away before you can get the pail."],
+        "use * corn", [
+            "move corn to _",
+            "replace guarded_pail with pail",
+            "say <turkeyFed> You toss the fresh ear of corn to the turkey, and he attacks it hungrily. Good job: the pail is now unguarded!"
+        ],
+        "drop * corn", "do use * corn"
+    ],
+    "objects": ["guarded_pail"]
+},
+
+"Pigsty": {
+    "description": ["say <descPigsty1> Pee-yew! You are leaning on the fence of a smelly pigsty. You can go back West to the yard.",
+                    "say <sndPig> {OINK!}",
+                    "say <descPigsty2> A fat pig grunts at you and rolls happily in the mud."],
+    "commands": [
+        "west", "goto Yard"
+    ],
+    "objects": ["empty_water_gun"]
+},
+
+"Barn": {
+    "description": ["say <descBarn1> You are standing in the doorway of a large, red barn. A grassy yard is to the east. A vegetable garden is to the west. You hear chickens cackling to the north. A large pasture opens to the south.",
+                    "say <sndCow> {MOOOO!}",
+                    "say <descBarn2> A black and white dairy cow greets you with a moo and a swish of her tail."],
+    "commands": [
+        "north", "goto Coop",
+        "south", "goto Pasture",
+        "east", "goto Yard",
+        "west", "goto Garden",
+        "use * pail", "say <usePailCow> You bang the pail against the side of the cow, and she moos at you in alarm. Maybe you should try a hands-on approach.",
+        "use * pail_with_milk", "do use * pail",
+        "use * -", [
+            "if pail is in_hand", [
+                "replace pail with pail_with_milk",
+                "say <milkCow> With a few gentle tugs, you have plenty of milk in your pail.",
+                "done"
+            ],
+            "if pail_with_milk is in_hand", [
+                "say <alreadyHaveMilk> You overflow the pail with milk and some spills onto the ground. Oh well, no use crying over it.",
+                "done"
+            ],
+            "say <noPailCow> That's the right idea, but you'll need something suitable to hold the milk."
+        ]
+    ],
+    "objects": []
+},
+
+"Garden": {
+    "description": ["say <descGarden1> Your garden coming in nicely. There are already a few ripe tomatoes, and the corn is ready to pick!",
+                    "say <sndHorse> {WHINNY!}",
+                    "say <descGarden2> A sleek, brown horse trots up to the fence opposite the garden. You walk over and give his neck a good scratching. You can see the barn to the east."
+                   ],
+    "commands": [
+        "east", "goto Barn",
+        "get left corn -", [
+            "move corn to _left_hand",
+            "say shareCornHorse"
+        ],
+        "get right corn -", [
+            "move corn to _right_hand",
+            "say shareCornHorse"
+        ]
+    ],
+    "messages": {
+        "shareCornHorse": "<shareCornHorse> You pick up the corn, break it in half, and share it with the horse. The horse nuzzles your face affectionately."
+    },
+    "objects": ["corn"]
+},
+
+"Pasture": {
+    "description": ["say <descPasture1> Several sheep are milling around near the edge of a large pasture.",
+                    "say <sndSheep> {BAAA!}",
+                    "say <descPasture2> Two lambs butt heads with each other and kick their back legs in the air playfully. The barn is back to the north."
+                   ],
+    "commands": [
+        "north", "goto Barn"
+    ],
+    "objects": []
+},
+
+"Coop": {
+    "description": ["say <descCoop1> You are standing before a large chicken coop. The barn is to the south. A large ramp from the coop lets the chickens come and go to roam freely about the farm. Hey! I bet there are fresh eggs in there!",
+                    "say <sndRooster> {CROW!}",
+                    "say <descCoop2> But a crotchety old rooster guards the coop and won't let you collect the eggs. He cocks his head and clucks at you as if to say",
+                    "say <sndRoosterGo> \"One of us has got to go!\"",
+                    "say <descCoop3> If you could just distract him with something!"
+                   ],
+    "commands": [
+        "south", "goto Barn",
+        "use * balloon", ["replace balloon with eggs",
+                          "say <useBalloon1> Oh, he likes that! He perked right up as if to say",
+                          "say <useBalloon2> \"Well look what we got here!\"",
+                          "say <useBalloon3> You let it float from your hand, and he trots after it. While he is mesmerized, you collect a full basket of eggs from the chicken coop!"
+                         ],
+        "use * *", ["say <useRoosterStuff1> He isn't impressed. He appears to be deep in thought -- pondering deep issues like",
+                    "say <sndRoosterCross> \"Why does a chicken cross the road?\"",
+                    "say <useRoosterStuff2> You might try something colorful or shiny!"],
+        "drop * balloon", "do use * balloon"
+    ],
+    "objects": []
+},
+
+"Stream": {
+    "description": ["say <descStream1> You are on the mossy bank of a small stream. The cool water flows into a pond to your east. The yard is to the north.",
+                    "say <sndFrog> {RIBBIT!}",
+                    "say <descStream2> You startled a plump, green frog! He hops into the water -- completely submerged except for two yellow eyes that watch you anxiously."
+                   ],
+    "commands": [
+        "north", "goto Yard",
+        "east", "goto Pond",
+        "action", ["if empty_water_gun is in_hand", [
+                       "replace empty_water_gun with water_gun",
+                       "say <fillGun> You dip the empty water gun into the cool stream and refill it. Look out world -- you've got squirting to do!",
+                       "done"
+                   ],
+                   "if water_gun is in_hand", [
+                       "say <gunIsFull> Your water gun is already full.",
+                       "done"
+                   ],
+                   "say miscNothingHappens"
+                  ]
+    ],
+    "objects": []
+},
+
+"Pond": {
+    "description": ["say <descPond1> You pause for a moment to gaze out over a large pond. A small stream feeds the pond from the west. There is a meadow to the east.",
+                    "say <sndDuck> {QUACK!}",
+                    "say <descPond2> A green headed Mallard swims in an out of a clump of reeds looking for bugs."
+                   ],
+    "commands": [
+        "east", "goto Meadow",
+        "west", "goto Stream"
+    ],
+    "objects": []
+},
+
+"Meadow": {
+    "description": "say <descMeadow1> You are standing in a large meadow filled with tiny, yellow flowers. There is a large pond to the west. A path north leads to a giant Oak tree.",
+    "commands": [
+        "west", "goto Pond",
+        "north", [
+            "if coyote is _here", [
+                "say <coyoteSnaps> The coyote snaps at you, but you back off just in time. He doesn't chase you, but it's clear you aren't going north with that coyote there!",
+                "done"
+            ],
+            "goto Tree"
+        ],
+        "use * water_gun", [
+            "replace water_gun with empty_water_gun",
+            "if coyote is _here", [
+                "move coyote to _",
+                "say <sndYelp> {YELP!}",
+                "say <coyoteRuns> The coyote takes one look at your water gun and yelps and flees into the woods. You give the gun a couple of squirts to show you mean business! You wait a couple of long minutes, but the coyote doesn't return. The path north looks safe now. Great job!",
+                "done"
+            ],
+            "say miscUseGun"
+        ]
+    ],
+    "objects": ["coyote"]
+},
+
+"Tree": {
+    "description": ["say <descTree1> You are standing beneath the limbs of a very old Oak tree that towers over this end of the meadow. A footpath leads south to the meadow.",
+                    "say <sndBird> {TWEET!}",
+                    "say <descTree2> A bright red bird is perched on the limb directly above you. He is happily whistling a tune for the whole world to enjoy. And you pause a minute to enjoy it."],
+    "commands": ["south", "goto Meadow"],
+    "objects": ["balloon"]
+}
+
+}
